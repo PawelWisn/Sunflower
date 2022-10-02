@@ -1,0 +1,29 @@
+version: '3'
+services:
+ backend:
+  build: ./sunflower
+  command: python manage.py runserver 0.0.0.0:8000
+  volumes:
+   - ./sunflower:/code
+  ports:
+   - "${WEB_PORT}:8000"
+  env_file:
+   - '.env'
+  depends_on:
+   - postgres
+ postgres:
+  environment:
+   TZ: ${TZ}
+   PGTZ: ${PGTZ}
+   POSTGRES_DB: ${POSTGRES_DB}
+   POSTGRES_USER: ${POSTGRES_USER}
+   POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  image: postgres:13.4-alpine
+  ports:
+   - "${DB_PORT}"
+  volumes:
+   - postgres-data:/var/lib/postgresql/data
+volumes:
+  postgres-data:
+  backend:
+
