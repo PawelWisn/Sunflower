@@ -132,9 +132,9 @@ LANGUAGES = [
 ]
 
 LOCALE_PATHS = (
-    os.path.join(BASE_DIR, 'locale'), 
+    os.path.join(BASE_DIR, 'ordering/locale'), 
 )
-
+print(LOCALE_PATHS, flush=1)
 TIME_ZONE = os.getenv('TZ')
 
 USE_I18N = True
