@@ -14,6 +14,7 @@ import os
 from corsheaders.defaults import default_headers
 from dotenv import load_dotenv
 from datetime import timedelta
+from django.utils.translation import pgettext_lazy as _
 
 load_dotenv()
 
@@ -44,12 +45,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "ordering",
     'corsheaders',
+    "crispy_forms",
+    "crispy_bootstrap5",
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -77,6 +81,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'sunflower.wsgi.application'
 
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.SUCCESS: 'bg-success p-2 text-dark bg-opacity-25',
+    messages.ERROR: 'bg-danger p-2 text-dark bg-opacity-25',
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -117,6 +126,15 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
+LANGUAGES = [
+    ('pl', _('Polish')),
+    ('en', _('English')),
+]
+
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'), 
+)
+
 TIME_ZONE = os.getenv('TZ')
 
 USE_I18N = True
@@ -129,9 +147,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
+MEDIA_ROOT = 'media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
