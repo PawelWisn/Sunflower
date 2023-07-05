@@ -1,0 +1,3 @@
+SMALL_SIZE = "s"
+MEDIUM_SIZE = "m"
+LARGE_SIZE = "l"
