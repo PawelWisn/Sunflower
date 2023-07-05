@@ -6,7 +6,7 @@ from .constants import SMALL_SIZE, MEDIUM_SIZE, LARGE_SIZE
 class Product(models.Model):
     """Represents sellable item"""
 
-    sizes = (
+    SIZES = (
         (SMALL_SIZE, _("Small")),
         (MEDIUM_SIZE, _("Medium")),
         (LARGE_SIZE, _("Large")),
@@ -14,7 +14,7 @@ class Product(models.Model):
 
     name = models.CharField(_("Name"), max_length=255)
     quantity = models.PositiveIntegerField(_("Quantity"))
-    size = models.CharField(_("Size"), choices=sizes, max_length=3, db_index=True)
+    size = models.CharField(_("Size"), choices=SIZES, max_length=3, db_index=True)
     order = models.PositiveIntegerField(_("Order"), default=1, db_index=True)
 
     def __str__(self):
