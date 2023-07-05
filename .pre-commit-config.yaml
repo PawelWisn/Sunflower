@@ -1,0 +1,22 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-ast
+      - id: check-merge-conflict
+      - id: detect-private-key
+      - id: check-byte-order-marker
+      - id: end-of-file-fixer
+      - id: no-commit-to-branch
+        args: [--branch, main]
+      - id: pretty-format-json
+        args: ['--autofix', '--indent', '2', '--no-sort-keys']
+      - id: trailing-whitespace
+      - id: check-yaml
+      - id: check-json
+
+  - repo: https://github.com/psf/black
+    rev: 23.3.0
+    hooks:
+    -   id: black
