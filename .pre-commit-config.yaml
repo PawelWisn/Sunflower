@@ -3,6 +3,7 @@ repos:
     rev: v4.4.0
     hooks:
       - id: check-added-large-files
+        args: ['--maxkb=2048']
       - id: check-ast
       - id: check-merge-conflict
       - id: detect-private-key
