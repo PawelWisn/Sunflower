@@ -2,8 +2,8 @@ version: '3'
 services:
   backend:
     build: ./sunflower
-    command: python manage.py runserver 0.0.0.0:8000
-    entrypoint: ["./entrypoint.sh"]
+    command: ["invoke", "run-api", "--port", "${BE_PORT}", "--db-port", "${DB_PORT}"]
+    restart: on-failure
     volumes:
       - ./sunflower:/code
     ports:
