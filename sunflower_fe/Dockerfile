@@ -1,4 +1,4 @@
-FROM node:18
+FROM node:16
 
 RUN mkdir /code_fe
 WORKDIR /code_fe
