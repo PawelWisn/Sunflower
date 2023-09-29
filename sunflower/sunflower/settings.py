@@ -1,17 +1,13 @@
 from pathlib import Path
 import os
-import environ
 from django.utils.translation import gettext_lazy as _
 
-env = environ.Env()
-if env.str("ENV_PATH", "") != "":
-    env.read_env(env.str("ENV_PATH"))
 
 BASE_DIR = os.path.dirname((os.path.abspath(__file__)))
 
-DEBUG = env("DEBUG", default=False)
-ALLOWED_HOSTS = [allowed_host for allowed_host in env("ALLOWED_HOSTS").split(",")]
-SECRET_KEY = env("SECRET_KEY")
+DEBUG = os.environ.get("DEBUG", False)
+ALLOWED_HOSTS = [ah for ah in os.environ.get("ALLOWED_HOSTS").split(",")]
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # Application definition
 
@@ -60,11 +56,11 @@ WSGI_APPLICATION = "sunflower.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": os.getenv("POSTGRES_DB").strip(),
-        "USER": os.getenv("POSTGRES_USER").strip(),
-        "PASSWORD": os.getenv("POSTGRES_PASSWORD").strip(),
-        "HOST": os.getenv("DB_HOST"),
-        "PORT": os.getenv("DB_PORT"),
+        "NAME": os.environ.get("POSTGRES_DB").strip(),
+        "USER": os.environ.get("POSTGRES_USER").strip(),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD").strip(),
+        "HOST": os.environ.get("DB_HOST"),
+        "PORT": os.environ.get("DB_PORT"),
     }
 }
 
@@ -93,7 +89,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = os.getenv("TZ")
+TIME_ZONE = os.environ.get("TZ")
 
 USE_I18N = True
 
