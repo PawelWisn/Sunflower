@@ -4,3 +4,4 @@ psycopg2==2.9.6
 markdown==3.4.3
 django-filter==23.2
 pre-commit==2.16.0
+invoke==2.2.0
