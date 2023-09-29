@@ -25,4 +25,4 @@ def wait_for_database_setup(db_port="5432"):
     while subprocess.run(
         ["nc", "-z", "db", db_port], stdout=subprocess.PIPE
     ).returncode:
-        pass
+        time.sleep(2)
