@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 from django.utils.translation import gettext_lazy as _
+from corsheaders.defaults import default_headers
 
 
 BASE_DIR = os.path.dirname((os.path.abspath(__file__)))
@@ -9,7 +10,8 @@ DEBUG = os.environ.get("DEBUG", False)
 ALLOWED_HOSTS = [ah for ah in os.environ.get("ALLOWED_HOSTS").split(",")]
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
-# Application definition
+CORS_ALLOWED_ORIGINS = [ao for ao in os.environ.get("ALLOWED_ORIGINS").split(",")]
+CORS_ALLOW_HEADERS = default_headers + ("Access-Control-Allow-Origin",)
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -21,9 +23,11 @@ INSTALLED_APPS = [
     "core",
     "rest_framework",
     "django_filters",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
