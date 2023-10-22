@@ -9,6 +9,7 @@ from django.core.management.base import CommandError
 @task
 def run_api(c, port="8000", db_port="5432"):
     wait_for_database_setup(db_port)
+    call_command("collectstatic", "--no-input")
     call_command("migrate")
     create_superuser()
     call_command("runserver", f"0.0.0.0:{port}")
