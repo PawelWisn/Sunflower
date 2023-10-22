@@ -6,24 +6,14 @@ services:
     restart: on-failure
     volumes:
       - ./sunflower:/code
+      - staticfiles:/code/staticfiles/
+      - media:/code/media/
     ports:
       - "${BE_PORT}:8000"
     env_file:
       - '.env'
     depends_on:
       - db
-  frontend:
-    build:
-      context: ./sunflower_fe
-    volumes:
-      - ./sunflower_fe:/code_fe
-    ports:
-      - "${WEB_PORT}:3000"
-    command: npm start
-    env_file:
-      - '.env'
-    depends_on:
-      - backend
   db:
     image: postgres:15.3
     env_file:
@@ -32,6 +22,19 @@ services:
     - "${DB_PORT}:5432"
     volumes:
     - postgres-data:/var/lib/postgresql/data
-
+  nginx:
+    build:
+      context: .
+      dockerfile: ./webserver/Dockerfile
+    restart: always
+    volumes:
+      - staticfiles:/staticfiles
+      - media:/media
+    ports:
+      - "${WEB_PORT}:${WEB_PORT}"
+    depends_on:
+      - backend
 volumes:
   postgres-data:
+  staticfiles:
+  media:
