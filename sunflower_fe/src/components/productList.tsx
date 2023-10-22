@@ -22,7 +22,7 @@ function build_products_grid(data:any){
             data.forEach((obj:any) => {
                 products.push(
                     <Col style={ProductCardtyle} xs={12} sm={6} md={4} lg={4} xl={3} xxl={3}>
-                        <Product id={obj.id} name={obj.name} quantity={obj.quantity} size={obj.size} key={obj.id+obj.name} />
+                        <Product id={obj.id} name={obj.name} picture={obj.picture} quantity={obj.quantity} size={obj.size} key={obj.id+obj.name} />
                     </Col>
                 )
             });

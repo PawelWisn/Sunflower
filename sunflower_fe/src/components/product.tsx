@@ -15,10 +15,10 @@ const CenterStyle = {
 };
 
 function Product(props:any) {
-    const {id, name, quantity, size} = props;
+    const {id, name, picture, quantity, size} = props;
     return (
         <Card style={ProductCardStyle}>
-            <Card.Img variant="top" src="https://www.bolster.eu/media/images/5460_dbweb.jpg?1549350221" alt={name} style={ProductImageStyle}/>
+            <Card.Img variant="top" src={picture} alt={name} style={ProductImageStyle}/>
             <Card.Body style={CenterStyle}>
                 <Card.Title style={CenterStyle}>
                     {name} {id}
