@@ -11,6 +11,7 @@ class ProductListSerializer(ModelSerializer):
             "id",
             "name",
             "quantity",
+            "picture",
             "size",
             "order",
         )
