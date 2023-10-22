@@ -14,6 +14,7 @@ class Product(models.Model):
 
     name = models.CharField(_("Name"), max_length=255)
     quantity = models.PositiveIntegerField(_("Quantity"))
+    picture = models.ImageField(_("Image"), upload_to="images/stickers/", null=True)
     size = models.CharField(_("Size"), choices=SIZES, max_length=3, db_index=True)
     order = models.PositiveIntegerField(_("Order"), default=1, db_index=True)
 
