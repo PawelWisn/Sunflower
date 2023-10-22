@@ -6,12 +6,16 @@ from corsheaders.defaults import default_headers
 
 BASE_DIR = os.path.dirname((os.path.abspath(__file__)))
 
-DEBUG = os.environ.get("DEBUG", False)
+DEBUG = os.environ.get("DEBUG", "0") == "1"
 ALLOWED_HOSTS = [ah for ah in os.environ.get("ALLOWED_HOSTS").split(",")]
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 CORS_ALLOWED_ORIGINS = [ao for ao in os.environ.get("ALLOWED_ORIGINS").split(",")]
 CORS_ALLOW_HEADERS = default_headers + ("Access-Control-Allow-Origin",)
+
+DOMAIN = os.environ.get("DOMAIN")
+PROTOCOL = os.environ.get("PROTOCOL", "https")
+WEB_PORT = os.environ.get("WEB_PORT", "80")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -99,11 +103,11 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = "staticfiles/"
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_URL = f"{PROTOCOL}://{DOMAIN}:{WEB_PORT}/staticfiles/"
+STATIC_ROOT = "staticfiles"
 
-MEDIA_ROOT = "media/"
 MEDIA_URL = "media/"
+MEDIA_ROOT = "media"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
